@@ -1,7 +1,10 @@
 package com.example.paula.carracing;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.Log;
@@ -56,10 +59,26 @@ public class Obstacle implements GameObject{
         canvas.drawRect(rectangle, paint);
         canvas.drawRect(rectangle2, paint2);
         //canvas.drawRect(rectangle3, paint);
+
+        /*canvas.drawBitmap(getBitmap(), null, rectangle, new Paint());
+        canvas.drawBitmap(getBitmap(), null, rectangle2, new Paint());*/
     }
 
     @Override
     public void update() {
 
+    }
+
+    public Bitmap getBitmap()
+    {
+        BitmapFactory bf = new BitmapFactory();
+        Bitmap trunk = bf.decodeResource(Constants.CURRENT_CONTEXT.getResources(), R.drawable.trunk_m);
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(-2f, 1f);
+        trunk = Bitmap.createScaledBitmap(trunk, trunk.getWidth()/7, trunk.getHeight()/7, false);
+        Log.i("Trunk:", "Dim: "+trunk.getHeight()+" "+trunk.getWidth());
+
+        return trunk;
     }
 }

@@ -1,8 +1,12 @@
 package com.example.paula.carracing;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -64,7 +68,8 @@ public class ObstacleManager {
         }
         if(mObstacles.get(mObstacles.size() - 1).getRectangle().top >= Constants.SCREEN_HEIGHT){
             int xStart = (int) (Math.random()*(Constants.FIELD_WIDTH_RIGHT - playerGap));
-            mObstacles.add(0, new Obstacle(obstacleHeight, color, xStart, mObstacles.get(0).getRectangle().top - obstacleHeight - obstacleGap, playerGap));
+            mObstacles.add(0, new Obstacle(obstacleHeight, color, xStart,
+                    mObstacles.get(0).getRectangle().top - obstacleHeight - obstacleGap, playerGap));
             mObstacles.remove(mObstacles.size() - 1);
             score += 10;
         }
@@ -74,6 +79,7 @@ public class ObstacleManager {
     public void draw(Canvas canvas){
         for(Obstacle ob : mObstacles){
             ob.draw(canvas);
+            //canvas.drawBitmap(trunks[0], null, ob.getRectangle(), new Paint());
         }
         Paint paint = new Paint();
         paint.setTextSize(100);
